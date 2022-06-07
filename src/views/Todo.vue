@@ -20,6 +20,11 @@
                 {{ task.title }}
               </v-list-item-title>
             </v-list-item-content>
+            <v-list-item-action>
+              <v-btn icon @click.stop="removeTask(task.id)">
+                <v-icon color="red lighten-2">mdi-delete</v-icon>
+              </v-btn>
+            </v-list-item-action>
           </template>
         </v-list-item>
         <v-divider></v-divider>
@@ -49,6 +54,12 @@ export default {
           task.active = !task.active
         }
       })
+    },
+    // eslint-disable-next-line space-before-function-paren
+    removeTask(id) {
+      if (confirm('Are you sure?')) {
+        this.tasks = this.tasks.filter((task) => task.id !== id)
+      }
     }
   }
 }
