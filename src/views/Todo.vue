@@ -10,8 +10,8 @@
       hide-details
       clearable
     ></v-text-field>
-    <v-list flat class="pt-0" v-if="tasks.length">
-      <div v-for="task in tasks" :key="task.id">
+    <v-list flat class="pt-0" v-if="$store.state.tasks.length">
+      <div v-for="task in $store.state.tasks" :key="task.id">
         <v-list-item
           @click="doneTask(task.id)"
           :class="{ 'blue lighten-5': task.active }"
@@ -50,16 +50,7 @@
 <script>
 export default {
   name: 'Todo',
-  // eslint-disable-next-line space-before-function-paren
-  data() {
-    return {
-      tasks: [
-        { id: 1, title: 'Wake up', active: true },
-        { id: 2, title: 'Go to work', active: false },
-        { id: 3, title: 'Go to bed', active: false }
-      ]
-    }
-  },
+
   methods: {
     // eslint-disable-next-line space-before-function-paren
     doneTask(id) {
