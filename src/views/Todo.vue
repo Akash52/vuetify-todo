@@ -1,5 +1,15 @@
 <template>
   <div class="home">
+    <v-text-field
+      class="pa-3"
+      v-model="todo"
+      @click:append="addTodo"
+      label="Todo"
+      @keyup.enter="addTodo"
+      append-icon="mdi-plus"
+      hide-details
+      clearable
+    ></v-text-field>
     <v-list flat class="pt-0">
       <div v-for="task in tasks" :key="task.id">
         <v-list-item
@@ -60,6 +70,16 @@ export default {
       if (confirm('Are you sure?')) {
         this.tasks = this.tasks.filter((task) => task.id !== id)
       }
+    },
+    // eslint-disable-next-line space-before-function-paren
+    addTodo() {
+      const newTask = {
+        id: this.tasks.length + 1,
+        title: this.todo,
+        active: true
+      }
+      this.tasks.push(newTask)
+      this.todo = ''
     }
   }
 }
