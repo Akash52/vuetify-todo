@@ -6,12 +6,43 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     tasks: [
-      { id: 1, title: 'Wake up', active: true },
-      { id: 2, title: 'Go to work', active: false },
-      { id: 3, title: 'Go to bed', active: false }
+      {
+        id: 1,
+        title: 'Wake up',
+        done: false
+      },
+      {
+        id: 2,
+        title: 'Get bananas',
+        done: false
+      },
+      {
+        id: 3,
+        title: 'Eat bananas',
+        done: false
+      }
     ]
   },
-  mutations: {},
+  mutations: {
+    // eslint-disable-next-line space-before-function-paren
+    addTask(state, newTaskTitle) {
+      const newTask = {
+        id: Date.now(),
+        title: newTaskTitle,
+        done: false
+      }
+      state.tasks.push(newTask)
+    },
+    // eslint-disable-next-line space-before-function-paren
+    doneTask(state, id) {
+      const task = state.tasks.filter((task) => task.id === id)[0]
+      task.done = !task.done
+    },
+    // eslint-disable-next-line space-before-function-paren
+    deleteTask(state, id) {
+      state.tasks = state.tasks.filter((task) => task.id !== id)
+    }
+  },
   actions: {},
-  modules: {}
+  getters: {}
 })
