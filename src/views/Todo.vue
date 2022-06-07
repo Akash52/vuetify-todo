@@ -10,7 +10,7 @@
       hide-details
       clearable
     ></v-text-field>
-    <v-list flat class="pt-0">
+    <v-list flat class="pt-0" v-if="tasks.length">
       <div v-for="task in tasks" :key="task.id">
         <v-list-item
           @click="doneTask(task.id)"
@@ -40,6 +40,10 @@
         <v-divider></v-divider>
       </div>
     </v-list>
+    <div v-else class="no-tasks">
+      <v-icon color="primary" size="100">mdi-check</v-icon>
+      <span class="text-h5 primary--text">No tasks</span>
+    </div>
   </div>
 </template>
 
@@ -73,16 +77,24 @@ export default {
     },
     // eslint-disable-next-line space-before-function-paren
     addTodo() {
-      const newTask = {
-        id: this.tasks.length + 1,
-        title: this.todo,
-        active: true
+      if (this.todo !== '' && this.todo.trim()) {
+        this.tasks.push({
+          id: this.tasks.length + 1,
+          title: this.todo,
+          active: false
+        })
+        this.todo = ''
       }
-      this.tasks.push(newTask)
-      this.todo = ''
     }
   }
 }
 </script>
 
-<style></style>
+<style lang="scss">
+.no-tasks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+}
+</style>
