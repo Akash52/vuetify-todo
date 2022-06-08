@@ -1,16 +1,8 @@
 <template>
   <div class="home">
-    <v-text-field
-      v-model="newTaskTitle"
-      @click:append="addTask"
-      @keyup.enter="addTask"
-      class="pa-3"
-      outlined
-      label="Add Task"
-      append-icon="mdi-plus"
-      hide-details
-      clearable
-    ></v-text-field>
+    <!-- v-field -->
+
+    <field-add-task />
 
     <v-list v-if="$store.state.tasks.length" class="pt-0" flat>
       <div v-for="task in $store.state.tasks" :key="task.id">
@@ -49,21 +41,11 @@
 </template>
 
 <script>
+import FieldAddTask from '../components/Todo/FieldAddTask.vue'
 export default {
-  name: 'Home',
+  components: { FieldAddTask },
+  name: 'Home'
   // eslint-disable-next-line space-before-function-paren
-  data() {
-    return {
-      newTaskTitle: ''
-    }
-  },
-  methods: {
-    // eslint-disable-next-line space-before-function-paren
-    addTask() {
-      this.$store.commit('addTask', this.newTaskTitle)
-      this.newTaskTitle = ''
-    }
-  }
 }
 </script>
 
