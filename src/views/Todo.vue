@@ -1,10 +1,7 @@
 <template>
   <div class="home">
     <field-add-task />
-    <task-list
-      v-if="$store.state.tasks.length"
-      @click="$store.commit('doneTask', task.id)"
-    />
+    <task-list v-if="$store.state.tasks.length" />
     <div v-else class="no-tasks">
       <v-icon size="100" color="primary"> mdi-check </v-icon>
       <div class="text-h5 primary--text">No tasks</div>
@@ -18,7 +15,6 @@ import TaskList from '../components/Todo/TaskList.vue'
 export default {
   components: { FieldAddTask, TaskList },
   name: 'Home'
-  // eslint-disable-next-line space-before-function-paren
 }
 </script>
 
